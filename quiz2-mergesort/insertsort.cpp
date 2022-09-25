@@ -14,19 +14,19 @@ void generateArray(int A[]) {
 }
 
 void printArray(int A[], int size) {
-  
+  cout << "[";
   for ( int i = 0; i < SIZE; i++) {
-    cout << A[i];
+    cout << A[i] << ", ";
   }
+  cout << "]" << endl;
 }
-
 
 void Merge (int A[], int p, int q, int r) {
     int n1, n2, *L, *R ,i, j;
     n1 = q - p + 1;
     n2 = r - q;
-    R = new int[n1 + 1];
-    L = new int[n2 + 1];
+    L = new int[n1 + 1];
+    R = new int[n2 + 1];
 
     for (i = 0; i < n1; i++) 
       L[i] = A[p+i];
@@ -40,25 +40,23 @@ void Merge (int A[], int p, int q, int r) {
     j = 0;
     for (int k = p; k <=r; k++) {
         if (( L[i] != INT32_MAX) && (L[i] <= R[j])) {
-            if (L[i] <= R[i]) {
               A[k] = L[i];
               i++;
-          } else {
+        } else {
+            if ( R[j] != INT32_MAX) 
               A[k] = R[j];
               j++;
-          }
         }
     }
 }
 
-
-void MergeSort(int All. int p, int r) {
+void MergeSort(int A[], int p, int r) {
   int q;
   if (p < r) {
-    q = (p +r) /2;
-    MergeSort(A, p, q):
+    q = (p +r ) /2;
+    MergeSort(A, p, q);
     MergeSort(A, q + 1, r);
-    Merge(A, p. q, r);
+    Merge(A, p, q, r);
   }
 }
 
@@ -67,6 +65,6 @@ int main() {
     generateArray(A);
     cout << "Initial Array: ";
     printArray(A, SIZE);
-    MergeSort(A,0,SIZE-1);
+    MergeSort(A, 0, SIZE-1);
     printArray(A, SIZE);
 }    

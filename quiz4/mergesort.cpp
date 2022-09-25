@@ -18,8 +18,9 @@ void printArray(int A[], int size) {
   for ( int i = 0; i < SIZE; i++) {
     cout << A[i] << ",";
   }
-  cout << "]" << endl;
+  cout << "]" <<endl;
 }
+
 
 void Merge (int A[], int p, int q, int r) {
     int n1, n2, *L, *R ,i, j;
