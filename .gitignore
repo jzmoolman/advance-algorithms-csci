@@ -1,0 +1,8 @@
+main
+
+# misc
+**/.DS_Store
+
+**/*.dSYM
+**/zo_BACKUP
+**zo_TS
