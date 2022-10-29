@@ -19,7 +19,7 @@ res_t findMaximumSubarray(int* A, int low, int high){
   if (low == high) {
     result.low = low;
     result.high = high;
-    result.sum = A[low];
+    result.sum = A[low]);
   } else {
     int mid = (low+high)/2;
     res_t left = findMaximumSubarray(A, low, mid);
