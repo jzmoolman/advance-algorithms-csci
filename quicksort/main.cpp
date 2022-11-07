@@ -11,38 +11,46 @@ void generateArray(int A[]) {
     srand(time(NULL));
     int n;
     for ( int i = 0; i < SIZE; i++) {
-        while (1) {
-            n = rand() % 100 + 1;
-            for (int j = 0; j < i; j++) {
-                if ( A[j] == n) {
-                    continue;
-                }
+        // while (1) {
+            n = rand() % 10 + 1;
+            // for (int j = 0; j < i; j++) {
+            //     if ( A[j] == n) {
+            //         continue;
+            //     }
 
-            }
-            break;
-        }
+            // }
+            //break;
+        // }
         A[i] =  n;
     }
 
 }
 
-void partion(int A[], int lo, int hi) {
-    int r = A[hi];
-    int i = lo-1;
-
-    for ( int j =  lo; j < hi-1; j ++ ) {
-
-
+int partition_sort(int* buffer,int p, int r ) {
+  int pvalue = buffer[r];
+  int i = p-1;
+  for (int j = p; j < r; j++) {
+    if ( buffer[j] <= pvalue) {
+      i++;
+      int tmp = buffer[i];
+      buffer[i] = buffer[j];
+      buffer[j] = tmp;
     }
-
+  }
+  int tmp = buffer[i+1];
+  buffer[i+1] = buffer[r];
+  buffer[r] = tmp;
+  return  i+1;
 }
 
-void quickSort(int A[], int lo, int hi) {
-    if 
-
-
-
-
+void quick_sort(int *buffer, int p, int r) {
+    if (p < r) {
+        int q = partition_sort(buffer, p, r);
+        printf("p = %d r = %d q = %d\n", p, r, q);
+        pthread_t lt;
+        quick_sort(buffer, p, q-1);
+        quick_sort(buffer, q+1, r);
+    }
 }
 
 void printArray(int A[]) {
@@ -52,12 +60,12 @@ void printArray(int A[]) {
     cout << endl;
 }
 
-
 int main() {
-    cout << "Example of QuickSort" << endl;
+    cout << "Example of QuickSort, no need for the extra buffer[0] and sort same numbers" << endl;
     int array[SIZE];
     generateArray(array);
-    printArray(array);A
-    quickSort(array,0,9)
+    printArray(array);
+    quick_sort(array,0,9);
+    printArray(array);
 
 }
