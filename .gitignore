@@ -3,6 +3,7 @@ main
 # misc
 **/.DS_Store
 
+**/*.tar.gz
 **/*.dSYM
 **/zo_BACKUP
 **zo_TS
