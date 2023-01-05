@@ -2,10 +2,11 @@
 #include <time.h>
 #include <stdlib.h>
 
-
 using namespace std;
 
 const int SIZE = 10;
+
+void printArray(int A[], int size);
 
 void generateArray(int A[]) {
     srand(time(NULL));
@@ -26,11 +27,10 @@ void generateArray(int A[]) {
 }
 
 void swap(int &value1, int &value2) {
-    int tmp = value1;
-    value2 = tmp;
-    value1 = value2;
+    int tmp = value2;
+    value2 = value1;
+    value1 = tmp;
 }
-
 
 int partition(int* buffer,int p, int r ) {
   int pvalue = buffer[r];
@@ -51,32 +51,30 @@ int partition(int* buffer,int p, int r ) {
 
 int random_partition(int buffer[], int p, int r)
 {
-    int i = rand () % (r -p +1 ) + p;
+    int i = rand () % (r - p + 1 ) + p;
+                                                        // std::cout << "randin i " << i <<  std::endl;
     swap(buffer[r], buffer[i]);
+
+    return partition(buffer, p, r);
 }
 
 int randomize_select(int *buffer, int p, int r, int i) {
     if (p==r ) return p;
 
-    if (p < r) {
-        int q = partition(buffer, p, r);
-        printf("p = %d r = %d q = %d\n", p, r, q);
+    int q = random_partition(buffer, p, r);
 
 
-        int  k = q; 
-        k = q-p+1;   // WHY!!!!:w
-
-        if  (q == k) return  q; 
-        if ( i  <  k) 
-            return randomize_select(buffer, p, q-1, i);
-        if ( i > k )
-            return randomize_select(buffer, q+1, r, i);
-            // return randomize_select(buffer, q+1, r, i);
-    }
+    int k = q-p+1;   // WHY!!!!
+    printf("p = %d r = %d q = %d k = %d\n", p, r, q, k);
+    if  (i == k) return  q; 
+    if ( i  <  k) 
+        return randomize_select(buffer, p, q-1, i);
+    if ( i > k )
+        return randomize_select(buffer, q+1, r, i-k);
 }
 
-void printArray(int A[]) {
-    for ( int i = 0 ; i < SIZE; i++) {
+void printArray(int A[], int size) {
+    for ( int i = 0 ; i < size; i++) {
         cout << A[i] << ", ";
     }
     cout << endl;
@@ -86,11 +84,11 @@ int main() {
     cout << "Example of Random Select" << endl;
     int array[SIZE];
     generateArray(array);
-    printArray(array);
+    printArray(array, SIZE);
     cout << "i-th smallest number: ";
     int i;
     cin >> i;
-    int result = randomize_select(array, 0, 9, i);
-    cout << "ith index " << i << endl;
+    int result = randomize_select(array, 0, SIZE-1, i);
+    cout << "ith index " << result <<  " with value " << array[result] <<endl;
 
 }
